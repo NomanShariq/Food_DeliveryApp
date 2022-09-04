@@ -1,4 +1,6 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/utilis/dimensions.dart';
 import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
@@ -14,7 +16,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 220;
+  double _height = Dimension.pageviewcontainer;
   @override
   void initState() {
     super.initState();
@@ -32,15 +34,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 320,
-      child: PageView.builder(
-          controller: pageController,
-          itemCount: 5,
-          itemBuilder: (context, position) {
-            return _buildPagerItem(position);
-          }),
-    );
+    return Column(children: [
+      Container(
+        height: Dimension.pageview,
+        child: PageView.builder(
+            controller: pageController,
+            itemCount: 5,
+            itemBuilder: (context, position) {
+              return _buildPagerItem(position);
+            }),
+      ),
+      DotsIndicator(
+        dotsCount: 5,
+        position: _currPageValue,
+        decorator: DotsDecorator(
+          size: const Size.square(9.0),
+          activeSize: const Size(18.0, 9.0),
+          activeShape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        ),
+      ),
+    ]);
   }
 
   Widget _buildPagerItem(int index) {
@@ -74,7 +88,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Stack(
         children: [
           Container(
-            height: 220,
+            height: Dimension.pageviewcontainer,
             margin: EdgeInsets.only(
               left: 10,
               right: 10,
@@ -92,8 +106,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 130,
-              margin: EdgeInsets.only(left: 30, right: 30, bottom: 26),
+              height: Dimension.pageviewTextcontainer,
+              margin: EdgeInsets.only(left: 30, right: 30, bottom: 30),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 color: Colors.white,
@@ -114,13 +128,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ],
               ),
               child: Container(
-                padding: EdgeInsets.only(left: 22, right: 20, top: 10),
+                padding: EdgeInsets.only(
+                    left: 22, right: 20, top: Dimension.height20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BigText(text: "New York-Style Pizza."),
                     SizedBox(
-                      height: 10,
+                      height: Dimension.height15,
                     ),
                     Row(
                       children: [
@@ -146,29 +161,21 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         ),
                         SmallText(text: "comments"),
                         SizedBox(
-                          height: 30,
+                          height: Dimension.height30,
                         ),
                       ],
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          height: 40,
-                        ),
                         IconAndText(
                             icon: Icons.circle_rounded,
                             iconColour: Color.fromARGB(255, 247, 194, 116),
                             text: "Normal"),
-                        SizedBox(
-                          width: 10,
-                        ),
                         IconAndText(
                             icon: Icons.location_pin,
                             iconColour: Colors.cyan,
                             text: "1.7m"),
-                        SizedBox(
-                          width: 10,
-                        ),
                         IconAndText(
                             icon: Icons.timelapse,
                             iconColour: Colors.red,
