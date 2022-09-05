@@ -1,7 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utilis/dimensions.dart';
-import 'package:food_delivery_app/widgets/big_text.dart';
+import '../widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
 
@@ -35,6 +35,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      // slider
       Container(
         height: Dimension.pageview,
         child: PageView.builder(
@@ -44,16 +45,85 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               return _buildPagerItem(position);
             }),
       ),
+      // dots
       DotsIndicator(
         dotsCount: 5,
         position: _currPageValue,
         decorator: DotsDecorator(
           size: const Size.square(9.0),
           activeSize: const Size(18.0, 9.0),
+          activeColor: Colors.cyan,
           activeShape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
       ),
+
+      SizedBox(
+        height: Dimension.height20,
+      ),
+      // popilar text
+      Container(
+        margin: EdgeInsets.only(
+          left: Dimension.width20,
+        ),
+        child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+          BigText(text: "Popular"),
+          SizedBox(
+            width: Dimension.width10,
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 3),
+            child: BigText(text: ".", colour: Colors.grey),
+          ),
+          SizedBox(
+            width: Dimension.width10,
+          ),
+          SmallText(text: "Food pairing"),
+        ]),
+      ),
+      // list of images and text
+      Container(
+        height: 900,
+        child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          // shrinkWrap: true,
+          itemCount: 8,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.only(
+                  left: Dimension.width20, bottom: Dimension.height15),
+              child: Row(
+                children: [
+                  //image section
+                  Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.white38,
+                      borderRadius: BorderRadius.circular(Dimension.radius10),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage("assets/image/foodpro2.jpg"),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 100,
+                    width: 250,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(Dimension.radius20),
+                        bottomRight: Radius.circular(Dimension.radius20),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      )
     ]);
   }
 
@@ -90,11 +160,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Container(
             height: Dimension.pageviewcontainer,
             margin: EdgeInsets.only(
-              left: 10,
-              right: 10,
+              left: Dimension.width10,
+              right: Dimension.width10,
             ),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(Dimension.width20),
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(
@@ -107,9 +177,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: Dimension.pageviewTextcontainer,
-              margin: EdgeInsets.only(left: 30, right: 30, bottom: 30),
+              margin: EdgeInsets.only(
+                  left: Dimension.width30,
+                  right: Dimension.width30,
+                  bottom: Dimension.width30),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(Dimension.width20),
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -129,7 +202,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(
-                    left: 22, right: 20, top: Dimension.height20),
+                    left: Dimension.width20,
+                    right: Dimension.width20,
+                    top: Dimension.width20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -145,15 +220,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               (index) => Icon(
                                     Icons.star,
                                     color: Colors.cyan,
-                                    size: 20,
+                                    size: Dimension.iconSize20,
                                   )),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: Dimension.width10,
                         ),
                         SmallText(text: "4.5"),
                         SizedBox(
-                          width: 10,
+                          width: Dimension.width10,
                         ),
                         SmallText(text: "1287"),
                         SizedBox(
