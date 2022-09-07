@@ -1,9 +1,12 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+
 import 'package:food_delivery_app/utilis/dimensions.dart';
-import '../widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
+
+import '../../widgets/big_text.dart';
+
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -91,13 +94,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           itemBuilder: (context, index) {
             return Container(
               margin: EdgeInsets.only(
-                  left: Dimension.width20, bottom: Dimension.height15),
+                  left: Dimension.width20,
+                  bottom: Dimension.height15,
+                  right: Dimension.width20),
               child: Row(
                 children: [
                   //image section
                   Container(
-                    height: 100,
-                    width: 100,
+                    height: Dimension.listViewImgSize,
+                    width: Dimension.listViewImgSize,
                     decoration: BoxDecoration(
                       color: Colors.white38,
                       borderRadius: BorderRadius.circular(Dimension.radius10),
@@ -107,14 +112,45 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 100,
-                    width: 250,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(Dimension.radius20),
-                        bottomRight: Radius.circular(Dimension.radius20),
+                  Expanded(
+                    child: Container(
+                      height: Dimension.listViewTextSize,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(Dimension.radius20),
+                          bottomRight: Radius.circular(Dimension.radius20),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: Dimension.width10, right: Dimension.width10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(text: "Best New-York Pizza in Pakistan"),
+                            SmallText(text: "All Pakistan Characteristics"),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconAndText(
+                                    icon: Icons.circle_rounded,
+                                    iconColour:
+                                        Color.fromARGB(255, 247, 194, 116),
+                                    text: "Normal"),
+                                IconAndText(
+                                    icon: Icons.location_pin,
+                                    iconColour: Colors.cyan,
+                                    text: "1.7m"),
+                                IconAndText(
+                                    icon: Icons.timelapse,
+                                    iconColour: Colors.red,
+                                    text: "32min")
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/home/food_page_body.dart';
+import '../home/food_page_body.dart';
 import 'package:food_delivery_app/utilis/dimensions.dart';
 import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
@@ -19,7 +19,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
       children: [
         Container(
             margin: EdgeInsets.only(
-                top: Dimension.height45, bottom: Dimension.height45),
+                top: Dimension.height45, bottom: Dimension.height15),
             padding: EdgeInsets.only(
                 left: Dimension.width20, right: Dimension.width20),
             child: Row(
