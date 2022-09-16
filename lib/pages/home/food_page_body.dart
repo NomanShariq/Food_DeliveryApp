@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:food_delivery_app/utilis/dimensions.dart';
+import 'package:food_delivery_app/widgets/app_column.dart';
 import 'package:food_delivery_app/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
 
@@ -241,60 +242,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     left: Dimension.width20,
                     right: Dimension.width20,
                     top: Dimension.width20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: "New York-Style Pizza."),
-                    SizedBox(
-                      height: Dimension.height15,
-                    ),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(
-                              5,
-                              (index) => Icon(
-                                    Icons.star,
-                                    color: Colors.cyan,
-                                    size: Dimension.iconSize20,
-                                  )),
-                        ),
-                        SizedBox(
-                          width: Dimension.width10,
-                        ),
-                        SmallText(text: "4.5"),
-                        SizedBox(
-                          width: Dimension.width10,
-                        ),
-                        SmallText(text: "1287"),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        SmallText(text: "comments"),
-                        SizedBox(
-                          height: Dimension.height30,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconAndText(
-                            icon: Icons.circle_rounded,
-                            iconColour: Color.fromARGB(255, 247, 194, 116),
-                            text: "Normal"),
-                        IconAndText(
-                            icon: Icons.location_pin,
-                            iconColour: Colors.cyan,
-                            text: "1.7m"),
-                        IconAndText(
-                            icon: Icons.timelapse,
-                            iconColour: Colors.red,
-                            text: "32min")
-                      ],
-                    )
-                  ],
-                ),
+                child: AppColumn(text: "New-York Style Pizza",),
               ),
             ),
           ),

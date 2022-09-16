@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utilis/dimensions.dart';
+import 'package:food_delivery_app/widgets/app_column.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
+
+import '../../widgets/big_text.dart';
 
 class PopularFoodDetailPage extends StatelessWidget {
   const PopularFoodDetailPage({Key? key}) : super(key: key);
@@ -37,7 +40,92 @@ class PopularFoodDetailPage extends StatelessWidget {
               ],
             ),
           ),
+          Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              top: Dimension.detailImgSize - 10,
+              child: Container(
+                padding: EdgeInsets.only(
+                    left: Dimension.width20,
+                    right: Dimension.width20,
+                    top: Dimension.height20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Dimension.radius20),
+                    topRight: Radius.circular(Dimension.radius20),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppColumn(text: "New-York Style Pizza"),
+                    SizedBox(
+                      height: Dimension.height20,
+                    ),
+                    BigText(text: "Introduce"),
+                  ],
+                ),
+              )),
         ],
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Dimension.radius20),
+            topRight: Radius.circular(Dimension.radius20),
+          ),
+          color: Color.fromARGB(255, 224, 231, 224),
+        ),
+        padding: EdgeInsets.only(
+            left: Dimension.width20,
+            right: Dimension.width20,
+            top: Dimension.height30,
+            bottom: Dimension.height30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimension.radius15),
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.only(
+                top: Dimension.height15,
+                bottom: Dimension.height15,
+                right: Dimension.width20,
+                left: Dimension.width20,
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.remove),
+                  SizedBox(
+                    width: Dimension.width10,
+                  ),
+                  BigText(text: "0"),
+                  SizedBox(
+                    width: Dimension.width10,
+                  ),
+                  Icon(Icons.add),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                top: Dimension.height15,
+                bottom: Dimension.height15,
+                right: Dimension.width20,
+                left: Dimension.width20,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimension.radius15),
+                color: Colors.white,
+              ),
+              child: BigText(text: "\$10 | Add To Cart"),
+            ),
+          ],
+        ),
       ),
     );
   }
