@@ -16,7 +16,7 @@ class AppColumn extends StatelessWidget {
       children: [
         BigText(text: text),
         SizedBox(
-          height: Dimension.height15,
+          height: Dimension.height10,
         ),
         Row(
           children: [
@@ -42,7 +42,7 @@ class AppColumn extends StatelessWidget {
             ),
             SmallText(text: "comments"),
             SizedBox(
-              height: Dimension.height30,
+              height: Dimension.height45,
             ),
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utilis/dimensions.dart';
 import 'package:food_delivery_app/widgets/app_column.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
+import 'package:food_delivery_app/widgets/expandable_text_widget.dart';
 
 import '../../widgets/big_text.dart';
 
@@ -52,8 +53,8 @@ class PopularFoodDetailPage extends StatelessWidget {
                     top: Dimension.height20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(Dimension.radius20),
-                    topRight: Radius.circular(Dimension.radius20),
+                    topLeft: Radius.circular(Dimension.radius15),
+                    topRight: Radius.circular(Dimension.radius15),
                   ),
                   color: Colors.white,
                 ),
@@ -65,6 +66,16 @@ class PopularFoodDetailPage extends StatelessWidget {
                       height: Dimension.height20,
                     ),
                     BigText(text: "Introduce"),
+                    SizedBox(
+                      height: Dimension.height10,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: ExpandableTextWidget(
+                            text:
+                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."),
+                      ),
+                    )
                   ],
                 ),
               )),
@@ -76,7 +87,7 @@ class PopularFoodDetailPage extends StatelessWidget {
             topLeft: Radius.circular(Dimension.radius20),
             topRight: Radius.circular(Dimension.radius20),
           ),
-          color: Color.fromARGB(255, 224, 231, 224),
+          color: Color.fromARGB(255, 237, 243, 237),
         ),
         padding: EdgeInsets.only(
             left: Dimension.width20,
