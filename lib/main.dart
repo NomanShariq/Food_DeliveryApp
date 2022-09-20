@@ -4,8 +4,10 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'pages/food/recommended_food_detail.dart';
 import 'pages/home/main_food_page.dart';
+import './pages/helper/dependencies.dart' as dep;
 
-void main() {
+Future<void> main() async {
+  await dep.init(); 
   runApp(const MyApp());
 }
 
