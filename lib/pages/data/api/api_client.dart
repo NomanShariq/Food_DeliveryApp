@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '../../../utilis/app_constants.dart';
 
 class ApiClient extends GetConnect implements GetxService {
   late String token;
@@ -12,20 +13,20 @@ class ApiClient extends GetConnect implements GetxService {
   }) {
     baseUrl = appBaseUrl;
     timeout = Duration(seconds: 30);
+    token = APP_CONSTANTS.TOKEN;
     _mainHeaders = {
       'Content-type': 'application/json' 'Charset UTF-8',
       'Authorization': 'Bearer $token',
     };
   }
-    Future<Response> getData(
-      String uri,
-    ) async {
-      try {
-        Response response = await get(uri);
-        return response;
-      } catch (e) {
-        return Response(statusCode: 1,statusText: e.toString());
-      }
+  Future<Response> getData(
+    String uri,
+  ) async {
+    try {
+      Response response = await get(uri);
+      return response;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
     }
   }
-
+}

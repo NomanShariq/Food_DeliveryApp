@@ -1,13 +1,14 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/pages/controllers/popular_products_controller.dart';
 
 import 'package:food_delivery_app/utilis/dimensions.dart';
 import 'package:food_delivery_app/widgets/app_column.dart';
 import 'package:food_delivery_app/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/big_text.dart';
-
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -40,28 +41,31 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(children: [
       // slider
-      Container(
-        height: Dimension.pageview,
-        child: PageView.builder(
-            controller: pageController,
-            itemCount: 5,
-            itemBuilder: (context, position) {
-              return _buildPagerItem(position);
-            }),
-      ),
+      GetBuilder<PopularProductsController>(builder: (popularProducts) {
+        return Container(
+          height: Dimension.pageview,
+          child: PageView.builder(
+              controller: pageController,
+              itemCount: popularProducts.popularProductslist.length,
+              itemBuilder: (context, position) {
+                return _buildPagerItem(position);
+              }),
+        );
+      }),
       // dots
-      DotsIndicator(
-        dotsCount: 5,
-        position: _currPageValue,
-        decorator: DotsDecorator(
-          size: const Size.square(9.0),
-          activeSize: const Size(18.0, 9.0),
-          activeColor: Colors.cyan,
-          activeShape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-        ),
-      ),
-
+      GetBuilder<PopularProductsController>(builder: (popularProducts) {
+        return DotsIndicator(
+          dotsCount: popularProducts.popularProductslist.length,
+          position: _currPageValue,
+          decorator: DotsDecorator(
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeColor: Colors.cyan,
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        );
+      }),
       SizedBox(
         height: Dimension.height20,
       ),
@@ -109,7 +113,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       borderRadius: BorderRadius.circular(Dimension.radius10),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/image/foodpro2.jpg"),
+                        image: AssetImage("assets/image/foodpro.jpg"),
                       ),
                     ),
                   ),
@@ -205,7 +209,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(
-                  "assets/image/foodpro2.jpg",
+                  "assets/image/foodpro4.jpg",
                 ),
               ),
             ),
@@ -242,7 +246,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     left: Dimension.width20,
                     right: Dimension.width20,
                     top: Dimension.width20),
-                child: AppColumn(text: "New-York Style Pizza",),
+                child: AppColumn(
+                  text: "New-York Style Pizza",
+                ),
               ),
             ),
           ),

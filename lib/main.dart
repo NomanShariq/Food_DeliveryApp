@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/pages/food/popular_food_detail.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-
-import 'pages/food/recommended_food_detail.dart';
+import 'package:food_delivery_app/pages/controllers/popular_products_controller.dart';
+import 'package:get/get.dart';
 import 'pages/home/main_food_page.dart';
 import './pages/helper/dependencies.dart' as dep;
 
 Future<void> main() async {
-  await dep.init(); 
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
@@ -16,13 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<PopularProductsController>().getpopularProductslist();
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RecommendedFoodDetail(),
+      home: MainFoodPage(),
     );
   }
 }
