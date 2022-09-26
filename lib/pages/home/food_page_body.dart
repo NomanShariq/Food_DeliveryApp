@@ -1,6 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/models/product_models.dart';
 import 'package:food_delivery_app/pages/controllers/popular_products_controller.dart';
+import 'package:food_delivery_app/utilis/app_constants.dart';
 
 import 'package:food_delivery_app/utilis/dimensions.dart';
 import 'package:food_delivery_app/widgets/app_column.dart';
@@ -41,21 +43,24 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(children: [
       // slider
-      GetBuilder<PopularProductsController>(builder: (popularProducts) {
+      GetBuilder<PopularProductController>(builder: (popularProducts) {
         return Container(
           height: Dimension.pageview,
           child: PageView.builder(
               controller: pageController,
-              itemCount: popularProducts.popularProductslist.length,
+              itemCount: popularProducts.popularProductList.length,
               itemBuilder: (context, position) {
-                return _buildPagerItem(position);
+                return _buildPagerItem(
+                    position, popularProducts.popularProductList[position]);
               }),
         );
       }),
-      // dots
-      GetBuilder<PopularProductsController>(builder: (popularProducts) {
+
+      GetBuilder<PopularProductController>(builder: (popularProducts) {
         return DotsIndicator(
-          dotsCount: popularProducts.popularProductslist.length,
+          dotsCount: popularProducts.popularProductList.isEmpty
+              ? 1
+              : popularProducts.popularProductList.length,
           position: _currPageValue,
           decorator: DotsDecorator(
             size: const Size.square(9.0),
@@ -66,6 +71,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         );
       }),
+      // dots
       SizedBox(
         height: Dimension.height20,
       ),
@@ -96,7 +102,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           physics: NeverScrollableScrollPhysics(),
           // shrinkWrap: true,
           itemCount: 8,
-          itemBuilder: (context, index) {
+          itemBuilder: (
+            context,
+            index,
+          ) {
             return Container(
               margin: EdgeInsets.only(
                   left: Dimension.width20,
@@ -113,7 +122,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       borderRadius: BorderRadius.circular(Dimension.radius10),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/image/foodpro.jpg"),
+                        image: AssetImage(
+                            "assets/image/9447a79793a4b7f832d981f975c0abc4.jpg"),
                       ),
                     ),
                   ),
@@ -168,7 +178,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     ]);
   }
 
-  Widget _buildPagerItem(int index) {
+  Widget _buildPagerItem(int index, ProductModel popularProduct) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPageValue.floor()) {
       var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
@@ -208,8 +218,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               borderRadius: BorderRadius.circular(Dimension.width20),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
-                  "assets/image/foodpro4.jpg",
+                image: NetworkImage(
+                  AppConstants.BASE_URL + "/uploads/" + popularProduct.img!,
                 ),
               ),
             ),
@@ -245,7 +255,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 padding: EdgeInsets.only(
                     left: Dimension.width20,
                     right: Dimension.width20,
-                    top: Dimension.width20),
+                    bottom: Dimension.width10),
                 child: AppColumn(
                   text: "New-York Style Pizza",
                 ),
