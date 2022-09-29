@@ -253,6 +253,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(
+                    top: Dimension.height10,
                     left: Dimension.width20,
                     right: Dimension.width20,
                     bottom: Dimension.width10),
