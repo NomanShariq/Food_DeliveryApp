@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MainFoodPage(),
-      initialRoute: HelperRoutes.initial,
-      // getPages: ,
+      initialRoute: HelperRoute.initial,
+      getPages: HelperRoute.routes,
     );
   }
 }
