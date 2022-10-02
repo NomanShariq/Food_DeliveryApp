@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/pages/controllers/cart_controller.dart';
 import 'package:food_delivery_app/pages/controllers/popular_products_controller.dart';
 import 'package:food_delivery_app/utilis/app_constants.dart';
 import 'package:get/get.dart';
@@ -12,8 +13,8 @@ import 'package:food_delivery_app/widgets/expandable_text_widget.dart';
 import '../../widgets/big_text.dart';
 
 class PopularFoodDetailPage extends StatelessWidget {
-  int pageId;
-  PopularFoodDetailPage({
+  final int pageId;
+  const PopularFoodDetailPage({
     Key? key,
     required this.pageId,
   }) : super(key: key);
@@ -22,8 +23,9 @@ class PopularFoodDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var product =
         Get.find<PopularProductController>().popularProductList[pageId];
-    // print("product id is " + pageId.toString());
-    // print("product name is " + product.name!);
+    print("oky");
+    Get.find<PopularProductController>()
+        .initproduct(Get.find<CartController>());
 
     return Scaffold(
         body: Stack(
@@ -161,7 +163,12 @@ class PopularFoodDetailPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimension.radius15),
                     color: Colors.white,
                   ),
-                  child: BigText(text: "\$${product.price} | Add To Cart"),
+                  child: GestureDetector(
+                      onTap: () {
+                        popularproduct.addItem(product);
+                      },
+                      child: BigText(text: "\$${product.price} | Add To Cart"
+                      )),
                 ),
               ],
             ),

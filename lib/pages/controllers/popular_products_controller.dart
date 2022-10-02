@@ -1,4 +1,5 @@
 import 'package:food_delivery_app/models/product_models.dart';
+import 'package:food_delivery_app/pages/controllers/cart_controller.dart';
 import 'package:food_delivery_app/pages/data/api/Repository/popular_products_repo.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +9,7 @@ class PopularProductController extends GetxController {
 
   List<ProductModel> _popularProductList = [];
   List<ProductModel> get popularProductList => _popularProductList;
+  late CartController _cart;
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
@@ -15,10 +17,12 @@ class PopularProductController extends GetxController {
   int _quantity = 0;
   int get quantity => _quantity;
 
+  int _isInCart = 0;
+  int get isInCart => _isInCart + _quantity;
+
   Future<void> getpopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
-      print("got products");
       _popularProductList = [];
       _popularProductList.addAll(Product.fromJson(response.body).products);
       _isLoaded = true;
@@ -26,6 +30,7 @@ class PopularProductController extends GetxController {
     } else {}
   }
 
+  // product quantity
   void setQuantity(bool increment) {
     if (increment) {
       _quantity = checkQuantity(_quantity + 1);
@@ -35,6 +40,7 @@ class PopularProductController extends GetxController {
     update();
   }
 
+  // product quantity check
   int checkQuantity(int quantity) {
     if (quantity < 0) {
       Get.snackbar("Add atleast 1", "Cant reduce less than 0");
@@ -45,5 +51,15 @@ class PopularProductController extends GetxController {
     } else {
       return quantity;
     }
+  }
+
+  void initproduct(CartController cart) {
+    _quantity = 0;
+    _isInCart = 0;
+    _cart = cart;
+  }
+
+  void addItem(ProductModel product) {
+    _cart.addItem(product, quantity);
   }
 }
