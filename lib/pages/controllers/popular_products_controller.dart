@@ -53,13 +53,13 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initproduct(CartController cart) {
+  void addItem(ProductModel product) {
+    _cart.addItem(product, _quantity);
+  }
+
+  void initProduct(CartController cart) {
     _quantity = 0;
     _isInCart = 0;
     _cart = cart;
-  }
-
-  void addItem(ProductModel product) {
-    _cart.addItem(product, quantity);
   }
 }
