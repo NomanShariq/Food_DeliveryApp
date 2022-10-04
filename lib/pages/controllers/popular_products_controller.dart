@@ -37,16 +37,17 @@ class PopularProductController extends GetxController {
       _quantity = checkQuantity(_quantity + 1);
     } else {
       _quantity = checkQuantity(_quantity - 1);
+      print("decrement" + _quantity.toString());
     }
     update();
   }
 
   // product quantity check
   int checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((_isInCart + quantity) < 0) {
       Get.snackbar("Add atleast 1", "Cant reduce less than 0");
       return 0;
-    } else if (quantity > 30) {
+    } else if ((_isInCart + quantity) > 30) {
       Get.snackbar("No more add", "Cant add greater than 30");
       return 30;
     } else {
@@ -55,20 +56,37 @@ class PopularProductController extends GetxController {
   }
 
   void addItem(ProductModel product) {
-    if (_quantity > 0) {
-      _cart.addItem(product, _quantity);
-      _cart.items.forEach((key, value) {
-        print("");
-      });//dikhani hai print main id or quantity 
-    } else {
-      Get.snackbar("Cant add", "You have to add atleast 1 item in cart",
-          backgroundColor: Colors.cyan, colorText: Colors.white);
-    }
+    // if (_quantity > 0) {
+    _cart.addItem(product, _quantity);
+    _quantity = 0;
+    _isInCart = _cart.getQuantity(product);
+    _cart.items.forEach((key, value) {
+      print("id is " +
+          value.id.toString() +
+          "quantity is " +
+          value.quantity.toString());
+    });
+    // } else {
+    //   Get.snackbar("Cant add", "You have to add atleast 1 item in cart",
+    //       backgroundColor: Colors.cyan, colorText: Colors.white);
+    // }
   }
 
-  void initProduct(CartController cart) {
+  void initProduct(
+    ProductModel product,
+    CartController cart,
+  ) {
     _quantity = 0;
     _isInCart = 0;
     _cart = cart;
+    var exist = false;
+    exist = _cart.existInCart(product);
+
+    print("quantity of product is " + exist.toString());
+
+    if (exist) {
+      _isInCart = cart.getQuantity(product);
+    }
+    print("the quantity of cart items is" + isInCart.toString());
   }
 }

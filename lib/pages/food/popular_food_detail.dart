@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/models/product_models.dart';
 import '../controllers/cart_controller.dart';
 import '../controllers/popular_products_controller.dart';
 import 'package:food_delivery_app/utilis/app_constants.dart';
@@ -22,7 +23,7 @@ class PopularFoodDetailPage extends StatelessWidget {
     var product =
         Get.find<PopularProductController>().popularProductList[pageId];
     Get.find<PopularProductController>()
-        .initProduct(Get.find<CartController>());
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
         body: Stack(
           children: [
@@ -136,7 +137,7 @@ class PopularFoodDetailPage extends StatelessWidget {
                       SizedBox(
                         width: Dimension.width10,
                       ),
-                      BigText(text: popularproduct.quantity.toString()),
+                      BigText(text: popularproduct.isInCart.toString()),
                       SizedBox(
                         width: Dimension.width10,
                       ),
