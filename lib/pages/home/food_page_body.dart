@@ -198,7 +198,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   );
                 },
               )
-            : CircularProgressIndicator();
+            : CircularProgressIndicator(
+                color: Colors.cyan,
+              );
       })
     ]);
   }

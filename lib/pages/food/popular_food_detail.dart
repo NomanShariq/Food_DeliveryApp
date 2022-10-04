@@ -3,13 +3,11 @@ import '../controllers/cart_controller.dart';
 import '../controllers/popular_products_controller.dart';
 import 'package:food_delivery_app/utilis/app_constants.dart';
 import 'package:get/get.dart';
-
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
 import 'package:food_delivery_app/utilis/dimensions.dart';
 import 'package:food_delivery_app/widgets/app_column.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
 import 'package:food_delivery_app/widgets/expandable_text_widget.dart';
-
 import '../../widgets/big_text.dart';
 
 class PopularFoodDetailPage extends StatelessWidget {

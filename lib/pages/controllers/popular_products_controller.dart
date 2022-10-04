@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/product_models.dart';
 import 'package:food_delivery_app/pages/controllers/cart_controller.dart';
 import 'package:food_delivery_app/pages/data/api/Repository/popular_products_repo.dart';
@@ -45,16 +46,24 @@ class PopularProductController extends GetxController {
     if (quantity < 0) {
       Get.snackbar("Add atleast 1", "Cant reduce less than 0");
       return 0;
-    } else if (quantity > 40) {
-      Get.snackbar("No more add", "Cant add greater than 40");
-      return 40;
+    } else if (quantity > 30) {
+      Get.snackbar("No more add", "Cant add greater than 30");
+      return 30;
     } else {
       return quantity;
     }
   }
 
   void addItem(ProductModel product) {
-    _cart.addItem(product, _quantity);
+    if (_quantity > 0) {
+      _cart.addItem(product, _quantity);
+      _cart.items.forEach((key, value) {
+        print("");
+      });//dikhani hai print main id or quantity 
+    } else {
+      Get.snackbar("Cant add", "You have to add atleast 1 item in cart",
+          backgroundColor: Colors.cyan, colorText: Colors.white);
+    }
   }
 
   void initProduct(CartController cart) {
