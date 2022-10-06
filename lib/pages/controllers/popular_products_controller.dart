@@ -35,6 +35,7 @@ class PopularProductController extends GetxController {
   void setQuantity(bool increment) {
     if (increment) {
       _quantity = checkQuantity(_quantity + 1);
+      print("the items quantity is " + _quantity.toString());
     } else {
       _quantity = checkQuantity(_quantity - 1);
       print("decrement" + _quantity.toString());
@@ -56,7 +57,6 @@ class PopularProductController extends GetxController {
   }
 
   void addItem(ProductModel product) {
-    // if (_quantity > 0) {
     _cart.addItem(product, _quantity);
     _quantity = 0;
     _isInCart = _cart.getQuantity(product);
@@ -66,10 +66,7 @@ class PopularProductController extends GetxController {
           "quantity is " +
           value.quantity.toString());
     });
-    // } else {
-    //   Get.snackbar("Cant add", "You have to add atleast 1 item in cart",
-    //       backgroundColor: Colors.cyan, colorText: Colors.white);
-    // }
+    update();
   }
 
   void initProduct(
@@ -88,5 +85,9 @@ class PopularProductController extends GetxController {
       _isInCart = cart.getQuantity(product);
     }
     print("the quantity of cart items is" + isInCart.toString());
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
   }
 }
