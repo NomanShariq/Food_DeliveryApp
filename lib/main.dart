@@ -4,6 +4,7 @@ import 'package:food_delivery_app/pages/controllers/popular_products_controller.
 import 'package:food_delivery_app/pages/controllers/recommended_products_controller.dart';
 import 'package:food_delivery_app/route/helper_routes.dart';
 import 'package:get/get.dart';
+import 'pages/cart/cart_page.dart';
 import 'pages/home/main_food_page.dart';
 import './pages/helper/dependencies.dart' as dep;
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MainFoodPage(),
-      initialRoute: HelperRoute.initial,
+      // initialRoute: HelperRoute.initial,
       getPages: HelperRoute.routes,
     );
   }

@@ -8,6 +8,7 @@ import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/expandable_text_widget.dart';
 import 'package:get/get.dart';
 
+import '../cart/cart_page.dart';
 import '../controllers/cart_controller.dart';
 import '../controllers/popular_products_controller.dart';
 
@@ -40,7 +41,11 @@ class RecommendedFoodDetail extends StatelessWidget {
                 GetBuilder<PopularProductController>(builder: ((controller) {
                   return Stack(
                     children: [
-                      AppIcon(icon: Icons.shopping_cart_outlined),
+                      GestureDetector(
+                        onTap: () {
+                              Get.to(CartPage());
+                            },
+                        child: AppIcon(icon: Icons.shopping_cart_outlined)),
                       Get.find<PopularProductController>().totalItems >= 1
                           ? Positioned(
                               right: 0,

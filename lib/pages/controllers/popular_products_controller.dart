@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/models/cart_model.dart';
 import 'package:food_delivery_app/models/product_models.dart';
 import 'package:food_delivery_app/pages/controllers/cart_controller.dart';
 import 'package:food_delivery_app/pages/data/api/Repository/popular_products_repo.dart';
@@ -47,6 +48,10 @@ class PopularProductController extends GetxController {
   int checkQuantity(int quantity) {
     if ((_isInCart + quantity) < 0) {
       Get.snackbar("Add atleast 1", "Cant reduce less than 0");
+      if (_isInCart > 0) {
+        _quantity = -_isInCart;
+        return _quantity;
+      }
       return 0;
     } else if ((_isInCart + quantity) > 30) {
       Get.snackbar("No more add", "Cant add greater than 30");
@@ -79,15 +84,19 @@ class PopularProductController extends GetxController {
     var exist = false;
     exist = _cart.existInCart(product);
 
-    print("quantity of product is " + exist.toString());
+    // print("quantity of product is " + exist.toString());
 
     if (exist) {
       _isInCart = cart.getQuantity(product);
     }
-    print("the quantity of cart items is" + isInCart.toString());
+    // print("the quantity of cart items is" + isInCart.toString());
   }
 
   int get totalItems {
     return _cart.totalItems;
+  }
+
+  List<CartModel> get getItems {
+    return _cart.getItems;
   }
 }
