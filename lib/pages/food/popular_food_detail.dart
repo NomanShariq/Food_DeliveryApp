@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/product_models.dart';
 import 'package:food_delivery_app/pages/cart/cart_page.dart';
+import 'package:food_delivery_app/route/helper_routes.dart';
 import '../controllers/cart_controller.dart';
 import '../controllers/popular_products_controller.dart';
 import 'package:food_delivery_app/utilis/app_constants.dart';
@@ -52,7 +53,7 @@ class PopularFoodDetailPage extends StatelessWidget {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        Get.to(MainFoodPage());
+                        Get.toNamed(HelperRoute.getInitial);
                       },
                       child: AppIcon(icon: Icons.arrow_back_ios_new)),
                   GetBuilder<PopularProductController>(builder: ((controller) {
@@ -60,10 +61,12 @@ class PopularFoodDetailPage extends StatelessWidget {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Get.to(CartPage());
+                              if (controller.totalItems >= 1) {
+                                Get.toNamed(HelperRoute.getCartPage());
+                              }
                             },
                             child: AppIcon(icon: Icons.shopping_cart_outlined)),
-                        Get.find<PopularProductController>().totalItems >= 1
+                        controller.totalItems >= 1
                             ? Positioned(
                                 right: 0,
                                 top: 0,
